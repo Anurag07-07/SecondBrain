@@ -85,7 +85,7 @@ export const Signin = async (req, res) => {
             //Create a token
             const token = jwt.sign({
                 id: check._id.toString(),
-            }, process.env.JWT_SECRET, { expiresIn: "5min" });
+            }, process.env.JWT_SECRET);
             if (!token) {
                 res.status(400).json({
                     message: `Token Not Created`,

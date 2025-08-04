@@ -1,11 +1,11 @@
 import mongoose, { Schema, Types } from "mongoose";
-const contentTypes = ['audio', 'video', 'article', 'image'];
+const contentTypes = ['audio', 'video', 'article', 'image', 'pdf'];
 const ContentSchema = new Schema({
-    link: {
+    title: {
         type: String,
         required: true
     },
-    title: {
+    link: {
         type: String,
         required: true
     },

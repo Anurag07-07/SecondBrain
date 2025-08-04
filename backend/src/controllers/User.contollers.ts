@@ -109,8 +109,7 @@ export const Signin = async (
         {
           id: check._id.toString(),
         },
-        process.env.JWT_SECRET as string,
-        { expiresIn: "5min" }
+        process.env.JWT_SECRET as string
       );
 
       if (!token) {
