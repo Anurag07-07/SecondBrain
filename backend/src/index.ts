@@ -2,13 +2,16 @@ import dotenv from 'dotenv'
 dotenv.config()
 import e from "express";
 import dbConnect from './db/db.js';
+import cors from 'cors'
 const app = e()
+
 
 import User from './routes/user.Route.js'
 import Content from './routes/Content.route.js'
 
 //Body parser
 app.use(e.json())
+app.use(cors())
 
 //Port
 app.use('/api/v1',User)

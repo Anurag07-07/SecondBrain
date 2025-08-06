@@ -16,7 +16,7 @@ export const createContent = async (req, res) => {
         });
         res.status(200).json({
             message: `Content has Created`,
-            user: content.id
+            contentid: content.id
         });
     }
     catch (error) {
@@ -32,7 +32,7 @@ export const getContent = async (req, res) => {
         //Find The Content on the Basis of the UserId
         const content = await ContentSchema.find({
             userId: UserId
-        }).populate("userId"); //To get The Userid of the user and Username of the user 
+        }).populate("userId", "username"); //To get The Userid of the user and Username of the user 
         res.status(200).json({
             data: content
         });
