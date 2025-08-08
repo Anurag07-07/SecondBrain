@@ -34,7 +34,7 @@ const Signup = () => {
 
     try {
     
-      const response = await axios.post('http://localhost:3000/api/v1/signup',{
+      const response = await axios.post('https://secondbrain-9dlm.onrender.com/api/v1/signup',{
       email:LoginForm.email,
       username:LoginForm.username,
       password:LoginForm.password,
