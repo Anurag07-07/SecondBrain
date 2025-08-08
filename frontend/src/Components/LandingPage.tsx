@@ -5,7 +5,6 @@ import './Landing.css'
 import { Link } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import Signup from './Signup'
 
 const LandingPage = () => {
 
@@ -25,7 +24,7 @@ const LandingPage = () => {
       <ToogleButton></ToogleButton>
       <div className=' lg:flex lg:gap-x-6 lg:justify-center lg:items-center '>
         {/* Logo */}
-        <img src={Logo}  className=' lg:w-40 lg:bg-white lg:rounded-full' ></img>
+        <img src={Logo} alt='Logo'  className=' lg:w-40 lg:bg-white lg:rounded-full' ></img>
         {/* Web App Name */}
         <div>
         <div id='heading' className='name  lg:text-9xl lg:uppercase lg:dark:text-white '><span>Your</span> <span>Idea</span></div>

@@ -7,7 +7,7 @@ interface IButton{
   startIcon?:ReactElement
   endIcon?:ReactElement
   children?:ReactNode
-  text:string  
+  text?:string  
 }
 
 type VarientProps = Record<string,string>

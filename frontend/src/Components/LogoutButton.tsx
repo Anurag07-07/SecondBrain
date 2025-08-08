@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom'
 
 const LogoutButton = () => {
   const navigate = useNavigate()
-  async function LogoutDone(e:MouseEvent<HTMLButtonElement>) {
+  async function LogoutDone(e:React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault()
     localStorage.removeItem('token')
     navigate('/')
     console.log(`Logout Successfully`);
