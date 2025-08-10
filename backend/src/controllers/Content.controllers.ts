@@ -23,7 +23,8 @@ export const createContent = async(req:express.Request,res:express.Response)=>{
 
     res.status(200).json({
       message:`Content has Created`,
-      contentid:content.id
+      contentid:content.id,
+      data:content
     })
 
   } catch (error) {

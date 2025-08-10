@@ -20,6 +20,9 @@ const Createpage = () => {
       title,link,type,tags
     }
 
+    console.log(payload);
+    
+
     
     try {
       const response = await fetch('https://secondbrain-9dlm.onrender.com/api/v1/create',{
@@ -35,7 +38,6 @@ const Createpage = () => {
 
     if (data) {
       console.log(data);
-      navigate('/main')
     }
       
     } catch (error:unknown) {

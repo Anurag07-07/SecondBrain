@@ -7,7 +7,7 @@ interface IContent extends Document{
   title:string,
   userId:Types.ObjectId,
   tags:string[],
-  type:string
+  type:typeof contentTypes[number]
 }
 
 const ContentSchema:Schema = new Schema({
