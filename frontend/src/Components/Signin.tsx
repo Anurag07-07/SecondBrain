@@ -18,7 +18,7 @@ const Signin = () => {
 
     await new Promise((r)=>setTimeout(r,6000))
 
-    setloading(false)
+    
     
     const username = usernameRef.current?.value || "";
     const password = passwordRef.current?.value || "";
@@ -40,6 +40,8 @@ const Signin = () => {
     } catch (error) {
       console.log('Something went wrong');
       console.error(error);
+    }finally{
+      setloading(false)
     }
   }
 
