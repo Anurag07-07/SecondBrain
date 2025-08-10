@@ -6,7 +6,7 @@ export const createContent = async(req:express.Request,res:express.Response)=>{
   try {
     //Parse The Content
     const {title,type,link,tags} = req.body
-    console.log(tags);
+    console.log(req.body);
     
 
     //Get The UserId from the Request
@@ -24,7 +24,6 @@ export const createContent = async(req:express.Request,res:express.Response)=>{
     res.status(200).json({
       message:`Content has Created`,
       contentid:content.id,
-      data:content
     })
 
   } catch (error) {
