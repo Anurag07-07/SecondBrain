@@ -11,3 +11,4 @@ const TagSchema: Schema = new Schema({
 })
 
 export default mongoose.model<ITag>('Tag',TagSchema)
+
