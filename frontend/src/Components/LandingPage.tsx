@@ -33,10 +33,10 @@ const LandingPage = () => {
       </div>
       <div className=' lg:flex lg:gap-x-5'>
         <Link to={'/signup'}>
-        <Button type="primary" size='lg'  >Signup</Button>
+        <Button type="tertiary" size='lg'  >Signup</Button>
         </Link>
         <Link to={'/signin'} >
-        <Button type="primary" size='lg'  >Signin</Button>
+        <Button type="tertiary" size='lg'  >Signin</Button>
         </Link>
       </div>
     </div>

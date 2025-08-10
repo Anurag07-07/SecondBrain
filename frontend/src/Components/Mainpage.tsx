@@ -10,7 +10,7 @@ const Mainpage = () => {
         {/* Navbar */}
         <nav className='glass fixed  lg:flex lg:gap-x-36 lg:text-2xl lg:px-26  lg:rounded-full lg:py-3 lg:top-2 lg:right-96  '>
           <Link to={'/main'}>Home</Link>
-          <Link to={'/'}>Create</Link>
+          <Link to={'/create'}>Create</Link>
           <Link to={'/'}>Share</Link>
           <Link to={'/about'}>About</Link>
         </nav>
