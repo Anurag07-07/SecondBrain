@@ -6,7 +6,7 @@ interface IContent extends Document{
   link:string,
   title:string,
   userId:Types.ObjectId,
-  tags:[Types.ObjectId],
+  tags:string[],
   type:string
 }
 
@@ -25,8 +25,7 @@ const ContentSchema:Schema = new Schema({
     enum:contentTypes
   },
   tags:[{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Tag"
+    type:String,
   }],
   userId:{
     type:mongoose.Schema.Types.ObjectId,
