@@ -5,6 +5,7 @@ export const createContent = async (req, res) => {
     try {
         //Parse The Content
         const { title, type, link, tags } = req.body;
+        console.log(req.body);
         //Get The UserId from the Request
         const UserId = req.userId;
         //Insert into the database 
@@ -12,12 +13,12 @@ export const createContent = async (req, res) => {
             title,
             type,
             link,
-            tags,
+            tags: tags,
             userId: UserId
         });
         res.status(200).json({
             message: `Content has Created`,
-            contentid: content.id
+            contentid: content.id,
         });
     }
     catch (error) {

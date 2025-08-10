@@ -14,10 +14,10 @@ const ContentSchema = new Schema({
         required: true,
         enum: contentTypes
     },
-    tags: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Tag"
-        }],
+    tags: {
+        type: [String],
+        default: []
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
