@@ -49,7 +49,6 @@ const Mainpage = () => {
           
         }
       }
-      
     }
 
   const timeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -83,7 +82,7 @@ const Mainpage = () => {
         <div>
           {
             loading ? <h1>Loading...</h1> : data.map((c)=>(
-              <Card key={c.userId.id} title={c.title} link={c.link} tags={c.tags} type={c.type} userId={c.userId}   ></Card>
+              <Card key={c.userId.id} title={c.title} link={c.link} type={c.type} userId={c.userId}   ></Card>
             ))
           }
         </div>

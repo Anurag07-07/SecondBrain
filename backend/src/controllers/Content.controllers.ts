@@ -6,6 +6,8 @@ export const createContent = async(req:express.Request,res:express.Response)=>{
   try {
     //Parse The Content
     const {title,type,link,tags} = req.body
+    console.log(tags);
+    
 
     //Get The UserId from the Request
     const UserId = req.userId
