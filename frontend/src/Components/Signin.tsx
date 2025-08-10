@@ -1,4 +1,4 @@
-import { useRef, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import './Signup.css';
 import ToogleButton from './ToogleButton';
 import axios from 'axios';
@@ -9,10 +9,17 @@ const Signin = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [loading,setloading] = useState<boolean>(false)
 
   async function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+   
+    setloading(true)
 
+    await new Promise((r)=>setTimeout(r,6000))
+
+    setloading(false)
+    
     const username = usernameRef.current?.value || "";
     const password = passwordRef.current?.value || "";
 
@@ -71,7 +78,9 @@ const Signin = () => {
         </div>
 
         <button type='submit'>
-          <Button type='secondary' size='md'>Signin</Button>
+          {
+            loading ? <h1>Thank you for patience...</h1>:<Button type='secondary' size='md'>Signin</Button>
+          }
         </button>
       </form>
     </div>
