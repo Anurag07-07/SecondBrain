@@ -24,9 +24,10 @@ const ContentSchema:Schema = new Schema({
     required:true,
     enum:contentTypes
   },
-  tags:[{
-    type:String,
-  }],
+  tags: {
+  type: [String],
+  default: []
+  },
   userId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"User"
