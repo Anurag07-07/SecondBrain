@@ -16,6 +16,7 @@ app.use(e.json())
 app.use(cors({
   origin: [
     'https://secondbrain-1-ntn9.onrender.com', // your frontend URL
+
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],

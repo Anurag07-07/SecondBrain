@@ -6,6 +6,7 @@ export const createContent = async (req, res) => {
         //Parse The Content
         const { title, type, link, tags } = req.body;
         console.log(req.body);
+        console.log("Tags array check:", Array.isArray(req.body.tags));
         //Get The UserId from the Request
         const UserId = req.userId;
         //Insert into the database 
@@ -17,7 +18,8 @@ export const createContent = async (req, res) => {
             userId: UserId
         });
         res.status(200).json({
-            message: `Content has Created`,
+            content,
+            // message:`Content has Created`,
             contentid: content.id,
         });
     }
