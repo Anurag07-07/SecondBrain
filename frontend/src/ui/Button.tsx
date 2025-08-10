@@ -1,6 +1,5 @@
 import type { ReactElement, ReactNode } from "react"
 import './Button.css'
-import { useNavigate } from "react-router-dom"
 type Varient = "primary" | "secondary" | "tertiary"
 
 
@@ -30,16 +29,11 @@ const Size:SizeProps = {
   "lg":"lg:px-14 lg:py-2 lg:rounded-full lg:text-[1.2rem] lg:border lg:hover:bg-black lg:hover:text-white lg:transition-all lg:duration:500  lg:dark:"
 }
 
-const Button = ({type,size,startIcon,endIcon,children,text,link}:IButton) => {
+const Button = ({type,size,startIcon,endIcon,children,text}:IButton) => {
 
-  const navigate = useNavigate()
-
-  function Navigation() {
-    navigate(`/${link}`)
-  }
 
   return (
-    <button onClick={Navigation}  id="button1" className={`${Varients[type]} ${Size[size]}`}>
+    <button id="button1" className={`${Varients[type]} ${Size[size]}`}>
       {startIcon}{children ? children : text }{endIcon}
     </button>
   )
