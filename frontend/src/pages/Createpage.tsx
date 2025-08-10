@@ -38,6 +38,7 @@ const Createpage = () => {
 
     if (data) {
       console.log(data);
+      navigate('/main')
     }
       
     } catch (error:unknown) {

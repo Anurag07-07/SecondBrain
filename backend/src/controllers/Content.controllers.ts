@@ -17,7 +17,7 @@ export const createContent = async(req:express.Request,res:express.Response)=>{
       title,
       type,
       link,
-      tags,
+      tags:tags,
       userId:UserId
     })
 
