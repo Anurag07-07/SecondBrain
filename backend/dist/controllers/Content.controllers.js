@@ -70,28 +70,57 @@ export const deleteContent = async (req, res) => {
 };
 export const LinkGenerate = async (req, res) => {
     const { share } = req.body;
+    //Get The UserId
+    const UserId = req.userId;
+    console.log(1);
     try {
-        //Get The UserId
-        const UserId = req.userId;
-        //Create a link and store in link model
-        const hash = CreateHash(10);
-        //if share is true generate link if it is false delete the link
-        if (!share) {
-            await LinkSchema.findOneAndDelete({ userId: UserId });
+        //If Link existed already
+        const existingLink = await LinkSchema.findOne({ userId: UserId });
+        if (existingLink) {
             return res.status(200).json({
-                message: `Link Removed`
+                message: `${existingLink.hash}`
             });
         }
         else {
-            //Store link and userId in the database
-            await LinkSchema.create({
-                hash,
-                userId: UserId
-            });
-            res.status(200).json({
-                message: `${hash}`
-            });
+            //Create a link and store in link model
+            const hash = CreateHash(10);
+            //if share is true generate link if it is false delete the link
+            if (!share) {
+                await LinkSchema.findOneAndDelete({ userId: UserId });
+                return res.status(200).json({
+                    message: `Link Removed`
+                });
+            }
+            else {
+                //Store link and userId in the database
+                await LinkSchema.create({
+                    hash,
+                    userId: UserId
+                });
+                res.status(200).json({
+                    message: `${hash}`
+                });
+            }
         }
+    }
+    catch (error) {
+        res.status(500).json({
+            message: `Internal Server Error`
+        });
+    }
+};
+export const shareableLink = async (req, res) => {
+    const shareableLink = req.params.shareableLink;
+    try {
+        //Find The UserId if the shareable Link
+        const FindUser = await LinkSchema.findOne({
+            hash: shareableLink
+        });
+        //Now Find The Content that this user has
+        const content = await ContentSchema.find({ userId: FindUser?.userId }).select('-userId');
+        res.status(200).json({
+            data: content
+        });
     }
     catch (error) {
         res.status(500).json({
