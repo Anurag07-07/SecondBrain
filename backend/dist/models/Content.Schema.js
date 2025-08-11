@@ -21,6 +21,8 @@ const ContentSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    }, description: {
+        type: String,
     }
 });
 export default mongoose.model('Content', ContentSchema);

@@ -7,7 +7,8 @@ interface IContent extends Document{
   title:string,
   userId:Types.ObjectId,
   tags:string[],
-  type:typeof contentTypes[number]
+  type:typeof contentTypes[number],
+  description:string
 }
 
 const ContentSchema:Schema = new Schema({
@@ -31,6 +32,8 @@ const ContentSchema:Schema = new Schema({
   userId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"User"
+  },description:{
+    type:String,
   }
 })
 

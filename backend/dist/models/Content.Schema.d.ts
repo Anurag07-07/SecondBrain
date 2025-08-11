@@ -6,6 +6,7 @@ interface IContent extends Document {
     userId: Types.ObjectId;
     tags: string[];
     type: typeof contentTypes[number];
+    description: string;
 }
 declare const _default: mongoose.Model<IContent, {}, {}, {}, mongoose.Document<unknown, {}, IContent, {}, {}> & IContent & {
     _id: Types.ObjectId;

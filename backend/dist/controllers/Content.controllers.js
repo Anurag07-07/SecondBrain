@@ -4,22 +4,21 @@ import ContentSchema from "../models/Content.Schema.js";
 export const createContent = async (req, res) => {
     try {
         //Parse The Content
-        const { title, type, link, tags } = req.body;
-        console.log(req.body);
-        console.log("Tags array check:", Array.isArray(req.body.tags));
+        const { title, type, link, tags, description } = req.body;
         //Get The UserId from the Request
         const UserId = req.userId;
         //Insert into the database 
         const content = await ContentSchema.create({
             title,
             type,
+            description,
             link,
             tags: tags,
-            userId: UserId
+            userId: UserId,
         });
         res.status(200).json({
             content,
-            // message:`Content has Created`,
+            message: `Content has Created`,
             contentid: content.id,
         });
     }

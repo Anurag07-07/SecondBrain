@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom"
 import Button from "../ui/Button"
 import { IoArrowUndoSharp } from "react-icons/io5"
 import '../Components/mainpage.css'
+import Navbar from "./Navbar"
+import ToogleButton from "../Components/ToogleButton"
 
 const Createpage = () => {
 
   const [title,setTitle] = useState<string>("")
+  const [description,setDescription] = useState<string>("")
   const [link,setLink] = useState<string>("")
   const [type,setType] = useState<string>("pdf")
   const [tag,setTag] = useState<string>("")
@@ -17,7 +20,7 @@ const Createpage = () => {
 
     //Create A Form Type 
     const payload = {
-      title,link,type,tags
+      title,link,type,tags,description
     }
 
     console.log(payload);
@@ -64,22 +67,29 @@ const Createpage = () => {
   }
 
   return (
+    <>
+    <Navbar></Navbar>
+    <ToogleButton></ToogleButton>
     <div>
       <div onClick={Navigation}>
       <Button type="primary" size="md" startIcon={<IoArrowUndoSharp size={30} />}>Back to Main Page</Button>
       </div>
-      <div className=" lg:flex  lg:h-screen lg:flex-col lg:w-full  lg:bg-black lg:text-white lg:transition-all lg:duration-1000  lg:justify-center lg:items-center"> 
+      <div className=" lg:flex  lg:h-screen lg:flex-col lg:w-full  lg:dark:bg-black lg:dark:text-white lg:transition-all lg:duration-500  lg:justify-center lg:items-center"> 
         <form onSubmit={handleSubmit} className="glass lg:px-28 lg:py-12 lg:flex lg:flex-col lg:gap-y-10 ">
           <div className=" lg:flex flex-col">
-          <label htmlFor="title" className=" lg:text-3xl ">Title</label>
-          <input required type="text" className=" lg:border-b-2 lg:w-[40vw] lg:text-2xl  "  id="title" placeholder="Enter Title" value={title} onChange={(e)=>setTitle(e.target.value)}></input>
+          <label htmlFor="title" className=" lg:text-2xl ">Title</label>
+          <input required type="text" className=" lg:border-b-2 lg:w-[40vw]   "  id="title" placeholder="Enter Title" value={title} onChange={(e)=>setTitle(e.target.value)}></input>
+          </div>
+          <div className=" lg:flex flex-col">
+          <label htmlFor="title" className=" lg:text-2xl ">Description</label>
+          <textarea required  className=" lg:border-b-2 lg:w-[40vw]   "  id="title" placeholder="Enter Title" value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
           </div>
           <div  className=" lg:flex flex-col">
-          <label  htmlFor="link"  className=" lg:text-3xl ">Link</label>
-          <input  className=" lg:border-b-2 lg:w-[40vw] lg:text-2xl  "  required type="text" id="link" placeholder="Enter link" value={link} onChange={(e)=>setLink(e.target.value)}></input>
+          <label  htmlFor="link"  className=" lg:text-2xl ">Link</label>
+          <input  className=" lg:border-b-2 lg:w-[40vw]  "  required type="text" id="link" placeholder="Enter link" value={link} onChange={(e)=>setLink(e.target.value)}></input>
           </div>
           <div className=" lg:flex lg:flex-col lg:gap-y-3">
-          <label className="lg:text-3xl  lg:flex flex-col" htmlFor="link">Type</label>
+          <label className="lg:text-2xl  lg:flex flex-col" htmlFor="link">Type</label>
           <select className=" lg:bg-black lg:text-white" id="link"  value={type} onChange={(e)=>setType(e.target.value)}>
             <option value="pdf">Pdf</option>
             <option value="audio">Audio</option>
@@ -88,7 +98,7 @@ const Createpage = () => {
             <option value="image">Image</option>
           </select>
           <div className=" lg:flex flex-col">
-          <label  className=" lg:text-3xl "   htmlFor="tag">Tags</label>
+          <label  className=" lg:text-2xl "   htmlFor="tag">Tags</label>
           <div className=" lg:flex lg:gap-x-[40vh]">
           <input type="text" placeholder="Enter tag" value={tag} onChange={(e)=>setTag(e.target.value)}></input>
           <button  className=" lg:bg-white lg:text-black lg:border lg:rounded-full lg:px-3 lg:py-1 lg:hover:bg-black lg:hover:text-white lg:transition-all lg:duration-500 " type="button" onClick={HandleAddtag}>Add Tag</button>
@@ -109,6 +119,7 @@ const Createpage = () => {
         </form>
       </div>
     </div>
+    </>
   )
 }
 

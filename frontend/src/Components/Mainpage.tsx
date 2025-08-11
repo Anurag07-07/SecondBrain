@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
 import LogoutButton from './LogoutButton'
 import ToogleButton from './ToogleButton'
 import './mainpage.css'
 import { useEffect, useRef, useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import Card from '../pages/Card'
+import Navbar from '../pages/Navbar'
 
 type userIdProps = {
   id:string,
@@ -15,17 +15,21 @@ export interface IData{
   link:string,
   type:string,
   tags?:string[],
+  description?:string,
   userId:userIdProps
 }
 
 const Mainpage = () => {
 
   const [data,setData] = useState<IData[]>([])
-  const [loading,setLoading] = useState<boolean>(false)
 
-  //Function to get data from the backend
-  async function GetData() {
-      setLoading(true)
+  
+  const timeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(()=>{
+
+    //Function to get data from the backend
+    async function GetData() {
       try {
       
         const response =  await axios.get('http://localhost:3000/api/v1/view_content',{
@@ -37,7 +41,6 @@ const Mainpage = () => {
       if (response.data) {
         //Here response.data is returning data but we have to extract array which is data
         setData(response.data.data)
-        setLoading(false)
       }
         
       } catch (error) {
@@ -51,12 +54,11 @@ const Mainpage = () => {
       }
     }
 
-  const timeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  useEffect(()=>{
+    GetData()
 
     //Call database after eaach 10 sec so that if someone added something we get data in next refresh
-   timeRef.current = setTimeout(GetData,10*1000)
+   timeRef.current = setInterval(GetData,10*1000)
 
    return ()=>{
     //Unmounting
@@ -67,22 +69,15 @@ const Mainpage = () => {
   },[])
 
   return (
-    <div className='  lg:w-full lg:h-screen lg:dark:bg-black lg:dark:text-white'>
+    <div className='  lg:w-full lg:max-h-min lg:dark:bg-black lg:dark:text-white lg:transition-all lg:duration-500'>
       <ToogleButton></ToogleButton>
       <LogoutButton></LogoutButton>
         {/* Navbar */}
-        <div className='  lg:w-full lg:h-20 lg:dark:bg-black'>
-        <nav className='glass fixed  lg:flex lg:gap-x-36 lg:text-2xl lg:px-26  lg:rounded-full lg:py-3 lg:top-2 lg:right-96  '>
-          <Link to={'/main'}>Home</Link>
-          <Link to={'/create'}>Create</Link>
-          <Link to={'/'}>Share</Link>
-          <Link to={'/about'}>About</Link>
-        </nav>
-        </div>
-        <div>
+        <Navbar></Navbar>
+        <div className=' lg:flex lg:flex-wrap lg:gap-y-6 lg:py-4  lg:p-24 lg:w-full lg:h-max '>
           {
-            loading ? <h1>Loading...</h1> : data.map((c)=>(
-              <Card key={c.userId.id} title={c.title} link={c.link} type={c.type} userId={c.userId}   ></Card>
+            data.map((c)=>(
+              <Card description={c.description} key={c.userId.id} tags={c.tags} title={c.title} link={c.link} type={c.type} userId={c.userId}   ></Card>
             ))
           }
         </div>
