@@ -31,7 +31,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://secondbrain-9dlm.onrender.com/api/v1/signup', {
+      const response = await axios.post('http://localhost:3000/api/v1/signup', {
         email: loginForm.email,
         username: loginForm.username,
         password: loginForm.password,

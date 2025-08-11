@@ -8,17 +8,7 @@ import User from './routes/user.Route.js';
 import Content from './routes/Content.route.js';
 //Body parser
 app.use(e.json());
-// Configure allowed origins
-app.use(cors({
-    origin: [
-    // 'https://secondbrain-1-ntn9.onrender.com', // your frontend URL
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
-// Handle preflight requests
-// app.options('*', cors());
+app.use(cors());
 //Port
 app.use('/api/v1', User);
 app.use('/api/v1', Content);

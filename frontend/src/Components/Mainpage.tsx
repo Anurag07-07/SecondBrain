@@ -28,7 +28,7 @@ const Mainpage = () => {
       setLoading(true)
       try {
       
-        const response =  await axios.get('https://secondbrain-9dlm.onrender.com/api/v1/view_content',{
+        const response =  await axios.get('http://localhost:3000/api/v1/view_content',{
         headers:{
           'authorization':`Bearer ${localStorage.getItem('token')}`
         }

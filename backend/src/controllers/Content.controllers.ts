@@ -6,12 +6,12 @@ export const createContent = async(req:express.Request,res:express.Response)=>{
   try {
     //Parse The Content
     const {title,type,link,tags} = req.body
-    console.log(req.body);
-    console.log("Tags array check:", Array.isArray(req.body.tags));
     
-
+    
+    
     //Get The UserId from the Request
     const UserId = req.userId
+    console.log(UserId);
 
     //Insert into the database 
     const content = await ContentSchema.create({
@@ -24,7 +24,7 @@ export const createContent = async(req:express.Request,res:express.Response)=>{
 
     res.status(200).json({
       content,
-      // message:`Content has Created`,
+      message:`Content has Created`,
       contentid:content.id,
     })
 
