@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Card from '../pages/Card'
 import Navbar from '../pages/Navbar'
+import { CiShare2 } from "react-icons/ci";
 
 type userIdProps = {
   _id:string | undefined,
@@ -50,10 +51,11 @@ const Mainpage = () => {
 
   return (
     <>
+      <button className={` lg:fixed lg:top-5 lg:cursor-pointer lg:left-10 lg:dark:text-black lg:dark:bg-white lg:px-5 lg:flex lg:justify-center lg:items-center lg:gap-x-3 lg:py-2 lg:rounded-4xl`} ><span><CiShare2></CiShare2></span>Share</button>
       <ToogleButton></ToogleButton>
       <LogoutButton></LogoutButton>
       <Navbar></Navbar>
-    <div className='  lg:w-full lg:min-h-screen lg:dark:bg-black lg:dark:text-white lg:transition-all lg:duration-500'>
+      <div className='  lg:w-full lg:min-h-screen lg:dark:bg-black lg:dark:text-white lg:transition-all lg:duration-500'>
         <div className=' lg:flex  lg:flex-wrap   lg:w-full lg:justify-around lg:gap-y-6   '>
           {
             data.map((c)=>(
