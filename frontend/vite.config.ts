@@ -6,7 +6,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [react(),tailwindcss()],
     build: {
-        outDir: path.resolve(__dirname, '../backend/public'), // build into backend/public
+        outDir: 'dist', // build into backend/public
         emptyOutDir: true
     },
     server: {
