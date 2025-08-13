@@ -1,5 +1,3 @@
-import crypto from 'crypto'
-
 function CreateHash(data:number) {
   const alphabet = "qwertyuioplkjhgfdsazxcvbnm789456123"
   let hash = ""
