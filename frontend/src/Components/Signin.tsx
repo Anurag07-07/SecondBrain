@@ -1,9 +1,9 @@
 import { useRef, useState, type FormEvent } from 'react';
 import './Signup.css';
 import ToogleButton from './ToogleButton';
-import axios from 'axios';
 import Button from '../ui/Button';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from "../api/axiosInstance.ts";
 
 const Signin = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -24,7 +24,7 @@ const Signin = () => {
     const password = passwordRef.current?.value || "";
 
     try {
-      const response = await axios.post('https://secondbrain-ne5n.onrender.com/api/v1/signin', {
+      const response = await axiosInstance.post('/api/v1/signin', {
         username,
         password
       });

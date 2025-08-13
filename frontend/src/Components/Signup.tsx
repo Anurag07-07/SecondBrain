@@ -2,8 +2,9 @@ import { useState, type ChangeEvent, type FormEvent } from 'react';
 import ToogleButton from './ToogleButton';
 import './Signup.css';
 import Button from '../ui/Button';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from "../api/axiosInstance.ts";
 
 interface IForm {
   email: string;
@@ -31,11 +32,13 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://secondbrain-ne5n.onrender.com/api/v1/signup', {
+      const response = await axiosInstance.post('/api/v1/signup', {
         email: loginForm.email,
         username: loginForm.username,
         password: loginForm.password,
       });
+
+        console.log(response.data)
 
       if (response.data) {
         navigate('/signin');

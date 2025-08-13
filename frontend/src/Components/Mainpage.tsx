@@ -2,10 +2,9 @@ import LogoutButton from './LogoutButton'
 import ToogleButton from './ToogleButton'
 import './mainpage.css'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import Card from '../pages/Card'
 import Navbar from '../pages/Navbar'
-import ShareButton from '../pages/ShareButton'
+import axiosInstance from "../api/axiosInstance.ts";
 
 type userIdProps = {
   _id:string | undefined,
@@ -30,7 +29,7 @@ const Mainpage = () => {
 
   async function GetData() {
     try {
-      const response = await axios.get("https://secondbrain-ne5n.onrender.com/api/v1/view_content", {
+      const response = await axiosInstance.get("/api/v1/view_content", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -51,7 +50,6 @@ const Mainpage = () => {
 
   return (
     <>
-      <ShareButton></ShareButton>
       <ToogleButton></ToogleButton>
       <LogoutButton></LogoutButton>
       <Navbar></Navbar>

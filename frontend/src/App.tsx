@@ -5,7 +5,6 @@ import Signin from "./Components/Signin"
 import Mainpage from "./Components/Mainpage"
 import About from "./Components/About"
 import Createpage from "./pages/Createpage"
-import SharePage from "./pages/GetData.tsx";
 
 const App = () => {
   return (
@@ -17,7 +16,6 @@ const App = () => {
         <Route path="/main" element={<Mainpage></Mainpage>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/create" element={<Createpage></Createpage>}></Route>
-        <Route path={`/share/:shareableLink`} element={<SharePage/>}></Route>
       </Routes>
     </Router>
   )

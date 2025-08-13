@@ -3,8 +3,9 @@ import type { IData } from "../Components/Mainpage";
 import { IoIosTrash } from "react-icons/io";
 import "./card.css";
 import gsap from "gsap";
-import axios, { AxiosError } from "axios";
+import  { AxiosError } from "axios";
 import { useRef, useEffect } from "react";
+import axiosInstance from "../api/axiosInstance.ts";
 
 interface ICard extends IData {
     bgcolor?: "black" | "red";
@@ -64,8 +65,8 @@ const Card = ({
 
     async function handleDeleteCard(e: string) {
         try {
-            const response = await axios.delete(
-                `https://secondbrain-ne5n.onrender.com/api/v1/delete_content/${e}`,
+            const response = await axiosInstance.delete(
+                `/api/v1/delete_content/${e}`,
                 {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("token")}`,

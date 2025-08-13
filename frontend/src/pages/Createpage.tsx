@@ -28,7 +28,7 @@ const Createpage = () => {
 
     
     try {
-      const response = await fetch('https://secondbrain-ne5n.onrender.com/api/v1/create',{
+      const response = await fetch('http://localhost:3000/api/v1/create',{
       method:"POST",
       headers:{
         "authorization":`Bearer ${localStorage.getItem('token')}`,
