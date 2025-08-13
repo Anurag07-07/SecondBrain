@@ -85,7 +85,7 @@ const Card = ({
     return (
         <div
             ref={cardRef}
-            className="card-container relative flex flex-col gap-3 w-full lg:w-[25vw] md:m-6 rounded-3xl p-6 bg-gray-200 shadow-lg"
+            className="card-container relative flex flex-col gap-3 w-full lg:w-[25vw] md:m-6 rounded-3xl p-6 bg-gray-200 shadow-lg lg:dark:text-black lg:dark:bg-gray-300 lg:dark:shadow-lg  lg:dark:shadow-gray-200 dark:bg-gray-700   "
             style={{height:"500px"}}
         >
             <div className="flex justify-between items-start">
