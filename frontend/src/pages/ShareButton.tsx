@@ -21,7 +21,7 @@ const ShareButton = () => {
                setToogle(false)
                localStorage.setItem('link',response.data.message)
                const  link = localStorage.getItem('link')
-               navigator.clipboard.writeText(`http://localhost:3000/share/${link}`)
+               navigator.clipboard.writeText(`https://secondbrain-ne5n.onrender.com/share/${link}`)
            }
        }catch (e:unknown) {
            const  error = e as AxiosError<{type:string}>
