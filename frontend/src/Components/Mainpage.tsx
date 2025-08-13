@@ -30,7 +30,7 @@ const Mainpage = () => {
 
   async function GetData() {
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/view_content", {
+      const response = await axios.get("https://secondbrain-ne5n.onrender.com/api/v1/view_content", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },

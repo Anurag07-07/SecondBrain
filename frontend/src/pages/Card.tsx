@@ -65,7 +65,7 @@ const Card = ({
     async function handleDeleteCard(e: string) {
         try {
             const response = await axios.delete(
-                `http://localhost:3000/api/v1/delete_content/${e}`,
+                `https://secondbrain-ne5n.onrender.com/api/v1/delete_content/${e}`,
                 {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("token")}`,

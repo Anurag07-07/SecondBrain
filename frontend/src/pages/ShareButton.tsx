@@ -8,7 +8,7 @@ const ShareButton = () => {
 
   const GetData:()=>Promise<void> = async () => {
        try {
-           const response = await axios.post('http://localhost:3000/api/v1/share',{
+           const response = await axios.post('https://secondbrain-ne5n.onrender.com/api/v1/share',{
                share:true
            },{
                headers:{
@@ -36,7 +36,7 @@ const ShareButton = () => {
 
   const  removeLink = async ():Promise<void>=>{
       try {
-          const response = await  axios.post('http://localhost:3000/api/v1/share',{
+          const response = await  axios.post('https://secondbrain-ne5n.onrender.com/api/v1/share',{
               share:false
           },{
               headers:{

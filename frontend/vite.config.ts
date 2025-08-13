@@ -12,7 +12,7 @@ export default defineConfig({
     server: {
         proxy: {
             "/api": {
-                target: "http://localhost:3000", // Your backend dev server
+                target: "https://secondbrain-ne5n.onrender.com", // Your backend dev server
                 changeOrigin: true,
             },
         },
