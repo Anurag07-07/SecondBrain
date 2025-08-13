@@ -13,7 +13,7 @@ import Content from './routes/Content.route.js'
 app.use(e.json())
 
 app.use(cors({
-    origin: "http://localhost:5173", // Explicitly allow frontend
+    origin: "https://secondbrain-2.onrender.com", // Explicitly allow frontend
     credentials: true, // Allow cookies/auth headers
 }));
 
