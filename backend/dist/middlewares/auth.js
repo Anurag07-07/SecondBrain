@@ -6,6 +6,7 @@ const authMiddleware = async (req, res, next) => {
     try {
         //Fetch the Token From The Headers
         const tokenString = req.headers.authorization;
+        console.log("Working");
         //Get The Token from The Token String
         const token = tokenString?.split(" ")[1];
         //Check if the token is there or not

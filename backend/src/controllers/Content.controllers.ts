@@ -82,68 +82,42 @@ export const deleteContent = async(req:express.Request,res:express.Response)=>{
   }
 }
 
-export const LinkGenerate = async(req:express.Request,res:express.Response)=>{
-  const {share} = req.body
-  //Get The UserId
-  const UserId = req.userId
-  console.log(1);
-  
-  try {
-    //If Link existed already
-    const existingLink = await LinkSchema.findOne({userId:UserId})
-    if (existingLink) {
-      return res.status(200).json({
-        message:`${existingLink.hash}`
-      })
-    }else{
+export const LinkGenerate = async (req: express.Request, res: express.Response) => {
+    try {
+        const { share } = req.body;
+        const userId = req.userId;
 
+        const existingLink = await LinkSchema.findOne({ userId });
 
-  //Create a link and store in link model
-  const hash = CreateHash(10)
-  //if share is true generate link if it is false delete the link
-  if (!share) {
-    await LinkSchema.findOneAndDelete({userId:UserId})
-    return res.status(200).json({
-      message:`Link Removed`
-    })
-  }else{
-    //Store link and userId in the database
-    await LinkSchema.create({
-      hash,
-      userId:UserId
-    })
-    
-    res.status(200).json({
-      message:`${hash}`
-    })
-  }
-  }
-  } catch (error) {
-    res.status(500).json({
-      message:`Internal Server Error`
-    })
-  }
-}
+        if (!share) {
+            if (existingLink) await LinkSchema.findOneAndDelete({ userId });
+            return res.status(200).json({ message: "Link removed" });
+        }
 
+        if (existingLink) {
+            return res.status(200).json({ message: existingLink.hash });
+        }
 
-export const shareableLink = async(req:express.Request,res:express.Response)=>{
-  const shareableLink = req.params.shareableLink
-  try {
-    //Find The UserId if the shareable Link
-    const FindUser = await LinkSchema.findOne({
-      hash:shareableLink
-    })
+        const hash = CreateHash(10);
+        await LinkSchema.create({ hash, userId });
 
-    //Now Find The Content that this user has
-    const content = await ContentSchema.find({userId:FindUser?.userId}).select('-userId')
+        res.status(200).json({ message: hash });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
 
-    res.status(200).json({
-      data:content
-    })
+export const shareableLink = async (req: express.Request, res: express.Response) => {
+    try {
+        const shareableHash = req.params.shareableLink;
 
-  } catch (error) {
-    res.status(500).json({
-      message:`Internal Server Error`
-    })
-  }
-}
+        const findUser = await LinkSchema.findOne({ hash: shareableHash });
+        if (!findUser) return res.status(404).json({ message: "Invalid shareable link" });
+
+        const content = await ContentSchema.find({ userId: findUser.userId }).select('-userId');
+
+        res.status(200).json({ data: content });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+};

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-const contentTypes = ['audio','video','article','image','pdf']
+const contentTypes = ['audio','video','article','image','pdf','text','twitter','website','youtube']
 
 interface IContent extends Document{
   link:string,

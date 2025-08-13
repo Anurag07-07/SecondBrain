@@ -12,6 +12,8 @@ const authMiddleware = async(req:express.Request,res:express.Response,next:NextF
       //Fetch the Token From The Headers
       const tokenString = req.headers.authorization
 
+
+      console.log("Working")
       //Get The Token from The Token String
       const token = tokenString?.split(" ")[1]
 

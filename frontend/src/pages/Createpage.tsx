@@ -96,6 +96,10 @@ const Createpage = () => {
             <option value="video">Video</option>
             <option value="article">Article</option>
             <option value="image">Image</option>
+            <option value="twitter">Twitter</option>
+            <option value="youtube">Youtube</option>
+            <option value="text">Text</option>
+            <option value="website">Website</option>
           </select>
           <div className=" lg:flex flex-col">
           <label  className=" lg:text-2xl "   htmlFor="tag">Tags</label>
