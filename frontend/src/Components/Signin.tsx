@@ -9,80 +9,99 @@ const Signin = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [loading,setloading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-   
-    setloading(true)
 
-    await new Promise((r)=>setTimeout(r,6000))
+    setLoading(true);
 
-    
-    
+    await new Promise((r) => setTimeout(r, 2000)); // shorter delay than 6s
+
     const username = usernameRef.current?.value || "";
     const password = passwordRef.current?.value || "";
 
     try {
       const response = await axiosInstance.post('/api/v1/signin', {
         username,
-        password
+        password,
       });
 
       if (response.data) {
         console.log(response.data.token);
         localStorage.setItem('token', response.data.token);
         console.log(`Successfully login`);
-        navigate('/main');
+        navigate('/home');
       } else {
         console.log(`Token Not received`);
       }
     } catch (error) {
       console.log('Something went wrong');
       console.error(error);
-    }finally{
-      setloading(false)
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <div className='transition-all duration-500 lg:w-full lg:dark:bg-black lg:h-screen lg:flex lg:text-white lg:justify-center lg:items-center'>
-      <ToogleButton />
-      {/* Signin Page */}
+    <div className="w-full h-screen flex justify-center items-center text-black dark:text-white
+                    bg-gradient-to-br from-[#F4C5EF] via-[#FFA69E] to-[#E2DFBE] 
+                    dark:from-gray-900 dark:via-black dark:to-gray-700 
+                    transition-all duration-500">
+      <div className=' fixed top-10 right-20'>
+      <ToogleButton/>
+      </div>
+
+      {/* Signin Form */}
       <form
-        className='lg:bg-gradient-to-l lg:gap-y-10 lg:from-gray-700 lg:to-black lg:shadow-lg lg:shadow-black lg:w-96 lg:h-[70vh] lg:fixed lg:rounded-2xl lg:flex lg:flex-col lg:justify-center lg:items-center lg:dark:shadow-md lg:dark:shadow-white dark:lg:bg-gradient-to-b dark:lg:to-white'
+        className="bg-white/80 dark:bg-black/70 
+                   w-[90%] max-w-md p-6 rounded-2xl shadow-xl 
+                   flex flex-col gap-6 text-center
+                   sm:p-8 sm:gap-8"
         onSubmit={submitHandler}
       >
-        <div className='lg:text-center lg:fixed lg:top-10 lg:text-5xl lg:text-black lg:dark:text-white'>
+        {/* Heading */}
+        <div className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
           SIGNIN
         </div>
 
-        <div className='lg:flex lg:flex-col'>
-          <label htmlFor='username' className='lg:text-2xl'>Username</label>
+        {/* Username */}
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="username" className="text-lg font-medium">Username</label>
           <input
-            type='text'
+            type="text"
             ref={usernameRef}
-            id='username'
-            name='username'
-            className='lg:bg-transparent lg:w-72 lg:h-10 lg:border-b-2 lg:border-white'
+            id="username"
+            name="username"
+            className="w-full h-10 px-3 rounded-md border border-gray-300 dark:border-gray-600 
+                       bg-white dark:bg-transparent focus:outline-none 
+                       focus:ring-2 focus:ring-pink-400 dark:focus:ring-pink-500"
           />
         </div>
 
-        <div className='lg:flex lg:flex-col'>
-          <label htmlFor='password' className='lg:text-2xl'>Password</label>
+        {/* Password */}
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="password" className="text-lg font-medium">Password</label>
           <input
-            type='password'
+            type="password"
             ref={passwordRef}
-            id='password'
-            name='password'
-            className='lg:bg-transparent lg:w-72 lg:h-10 lg:border-b-2 lg:border-white'
+            id="password"
+            name="password"
+            className="w-full h-10 px-3 rounded-md border border-gray-300 dark:border-gray-600 
+                       bg-white dark:bg-transparent focus:outline-none 
+                       focus:ring-2 focus:ring-pink-400 dark:focus:ring-pink-500"
           />
         </div>
 
-        <button type='submit'>
-          {
-            loading ? <h1>Thank you for patience...</h1>:<Button type='secondary' size='md'>Signin</Button>
-          }
+        {/* Submit */}
+        <button type="submit" className="w-full mt-2">
+          {loading ? (
+            <div className="text-pink-600 font-semibold animate-pulse">
+              Thank you for your patience...
+            </div>
+          ) : (
+            <Button type="secondary" size="md">Signin</Button>
+          )}
         </button>
       </form>
     </div>

@@ -38,7 +38,7 @@ const Signup = () => {
         password: loginForm.password,
       });
 
-        console.log(response.data)
+      console.log(response.data);
 
       if (response.data) {
         navigate('/signin');
@@ -59,55 +59,75 @@ const Signup = () => {
   }
 
   return (
-    <div className='transition-all duration-500 lg:w-full lg:dark:bg-black lg:h-screen lg:flex lg:text-white lg:justify-center lg:items-center'>
-      <ToogleButton />
-      {/* Signup Page */}
+    <div className="w-full h-screen flex justify-center items-center text-black dark:text-white
+                    bg-gradient-to-br from-[#F4C5EF] via-[#FFA69E] to-[#E2DFBE] 
+                    dark:from-gray-900 dark:via-black dark:to-gray-700 
+                    transition-all duration-500">
+      <div className=' fixed top-10 right-20'>
+      <ToogleButton/>
+      </div>
+
+      {/* Signup Form */}
       <form
-        className='lg:bg-gradient-to-l lg:gap-y-10 lg:from-gray-700 lg:to-black lg:shadow-lg lg:shadow-black lg:w-96 lg:h-[70vh] lg:fixed lg:rounded-2xl lg:flex lg:flex-col lg:justify-center lg:items-center lg:dark:shadow-md lg:dark:shadow-white dark:lg:bg-gradient-to-b dark:lg:to-white'
+        className="bg-white/80 dark:bg-black/70 
+                   w-[90%] max-w-md p-6 rounded-2xl shadow-xl 
+                   flex flex-col gap-6 text-center
+                   sm:p-8 sm:gap-8"
         onSubmit={submitHandler}
       >
-        <div className='lg:text-center lg:fixed lg:top-10 lg:text-5xl lg:text-black lg:dark:text-white'>
+        {/* Heading */}
+        <div className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
           SIGNUP
         </div>
 
-        <div className='lg:flex lg:flex-col'>
-          <label htmlFor='email' className='lg:text-2xl'>Email</label>
+        {/* Email */}
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="email" className="text-lg font-medium">Email</label>
           <input
-            type='text'
-            id='email'
-            name='email'
+            type="text"
+            id="email"
+            name="email"
             value={loginForm.email}
             onChange={handleChange}
-            className='lg:bg-transparent lg:w-72 lg:h-10 lg:border-b-2 lg:border-white'
+            className="w-full h-10 px-3 rounded-md border border-gray-300 dark:border-gray-600 
+                       bg-white dark:bg-transparent focus:outline-none 
+                       focus:ring-2 focus:ring-pink-400 dark:focus:ring-pink-500"
           />
         </div>
 
-        <div className='lg:flex lg:flex-col'>
-          <label htmlFor='username' className='lg:text-2xl'>Username</label>
+        {/* Username */}
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="username" className="text-lg font-medium">Username</label>
           <input
-            type='text'
-            id='username'
-            name='username'
+            type="text"
+            id="username"
+            name="username"
             value={loginForm.username}
             onChange={handleChange}
-            className='lg:bg-transparent lg:w-72 lg:h-10 lg:border-b-2 lg:border-white'
+            className="w-full h-10 px-3 rounded-md border border-gray-300 dark:border-gray-600 
+                       bg-white dark:bg-transparent focus:outline-none 
+                       focus:ring-2 focus:ring-pink-400 dark:focus:ring-pink-500"
           />
         </div>
 
-        <div className='lg:flex lg:flex-col'>
-          <label htmlFor='password' className='lg:text-2xl'>Password</label>
+        {/* Password */}
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="password" className="text-lg font-medium">Password</label>
           <input
-            type='password'
-            id='password'
-            name='password'
+            type="password"
+            id="password"
+            name="password"
             value={loginForm.password}
             onChange={handleChange}
-            className='lg:bg-transparent lg:w-72 lg:h-10 lg:border-b-2 lg:border-white'
+            className="w-full h-10 px-3 rounded-md border border-gray-300 dark:border-gray-600 
+                       bg-white dark:bg-transparent focus:outline-none 
+                       focus:ring-2 focus:ring-pink-400 dark:focus:ring-pink-500"
           />
         </div>
 
-        <button type='submit'>
-          <Button type='secondary' size='md'>Signup</Button>
+        {/* Submit */}
+        <button type="submit" className="w-full mt-2">
+          <Button type="secondary" size="md">Signup</Button>
         </button>
       </form>
     </div>

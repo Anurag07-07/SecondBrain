@@ -1,4 +1,3 @@
-import crypto from 'crypto';
 function CreateHash(data) {
     const alphabet = "qwertyuioplkjhgfdsazxcvbnm789456123";
     let hash = "";

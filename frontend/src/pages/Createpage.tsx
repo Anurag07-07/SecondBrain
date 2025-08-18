@@ -1,128 +1,174 @@
 import { useState, type FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
-import Button from "../ui/Button"
-import { IoArrowUndoSharp } from "react-icons/io5"
 import '../Components/mainpage.css'
 import Navbar from "./Navbar"
-import ToogleButton from "../Components/ToogleButton"
 
 const Createpage = () => {
 
-  const [title,setTitle] = useState<string>("")
-  const [description,setDescription] = useState<string>("")
-  const [link,setLink] = useState<string>("")
-  const [type,setType] = useState<string>("pdf")
-  const [tag,setTag] = useState<string>("")
-  const [tags,setTags] = useState<string[]>([])
+  const [title, setTitle] = useState<string>("")
+  const [description, setDescription] = useState<string>("")
+  const [link, setLink] = useState<string>("")
+  const [type, setType] = useState<string>("pdf")
+  const [tag, setTag] = useState<string>("")
+  const [tags, setTags] = useState<string[]>([])
   const navigate = useNavigate()
-  async function handleSubmit(e:FormEvent<HTMLFormElement>) {
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    //Create A Form Type 
+    // Create A Form Type 
     const payload = {
-      title,link,type,tags,description
+      title, link, type, tags, description
     }
 
     console.log(payload);
-    
 
-    
     try {
-      const response = await fetch('https://secondbrain-1-n2ez.onrender.com/api/v1/create',{
-      method:"POST",
-      headers:{
-        "authorization":`Bearer ${localStorage.getItem('token')}`,
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(payload)
-    })
+      const response = await fetch('https://secondbrain-1-n2ez.onrender.com/api/v1/create', {
+        method: "POST",
+        headers: {
+          "authorization": `Bearer ${localStorage.getItem('token')}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
 
-    const data = await response.json()
+      const data = await response.json()
 
-    if (data) {
-      console.log(data);
-      navigate('/main')
-    }
-      
-    } catch (error:unknown) {
+      if (data) {
+        console.log(data);
+        navigate('/home')
+      }
+
+    } catch (error: unknown) {
       console.error(error);
     }
   }
 
   function HandleAddtag() {
-    if (tag.trim() && !tags.includes(tag.trim()) ) {
-      setTags([...tags,tag.trim()])
+    if (tag.trim() && !tags.includes(tag.trim())) {
+      setTags([...tags, tag.trim()])
       setTag("")
     }
   }
-  
-  function HandleRemovetag(tagToremove:string) {
-    const remove = tags.filter((e)=>e!==tagToremove)
+
+  function HandleRemovetag(tagToremove: string) {
+    const remove = tags.filter((e) => e !== tagToremove)
     setTags(remove)
   }
 
 
-  function Navigation() {
-    navigate('/main')
-  }
-
   return (
     <>
-    <Navbar></Navbar>
-    <ToogleButton></ToogleButton>
-    <div>
-      <div onClick={Navigation}>
-      <Button type="primary" size="md" startIcon={<IoArrowUndoSharp size={30} />}>Back to Main Page</Button>
-      </div>
-      <div className=" lg:flex  lg:h-screen lg:flex-col lg:w-full  lg:dark:bg-black lg:dark:text-white lg:transition-all lg:duration-500  lg:justify-center lg:items-center"> 
-        <form onSubmit={handleSubmit} className="glass lg:px-28 lg:py-12 lg:flex lg:flex-col lg:gap-y-10 ">
-          <div className=" lg:flex flex-col">
-          <label htmlFor="title" className=" lg:text-2xl ">Title</label>
-          <input required type="text" className=" lg:border-b-2 lg:w-[40vw]   "  id="title" placeholder="Enter Title" value={title} onChange={(e)=>setTitle(e.target.value)}></input>
+      <Navbar />
+      <div className="flex justify-center items-center min-h-[90vh] p-4 dark:bg-black dark:text-white transition-all duration-500">
+        <form onSubmit={handleSubmit} className="glass p-6 md:p-12 flex flex-col gap-y-6 md:gap-y-10 w-full max-w-lg md:max-w-xl">
+          {/* Title */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="title" className="text-lg md:text-2xl font-medium">Title</label>
+            <input
+              required
+              type="text"
+              className="border-b-2 p-2 focus:outline-none focus:border-blue-500 bg-transparent"
+              id="title"
+              placeholder="Enter Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </div>
-          <div className=" lg:flex flex-col">
-          <label htmlFor="title" className=" lg:text-2xl ">Description</label>
-          <textarea required  className=" lg:border-b-2 lg:w-[40vw]   "  id="title" placeholder="Enter Title" value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
+
+          {/* Description */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="description" className="text-lg md:text-2xl font-medium">Description</label>
+            <textarea
+              required
+              className="border-b-2 p-2 focus:outline-none focus:border-blue-500 bg-transparent"
+              id="description"
+              placeholder="Enter Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
           </div>
-          <div  className=" lg:flex flex-col">
-          <label  htmlFor="link"  className=" lg:text-2xl ">Link</label>
-          <input  className=" lg:border-b-2 lg:w-[40vw]  "  required type="text" id="link" placeholder="Enter link" value={link} onChange={(e)=>setLink(e.target.value)}></input>
+
+          {/* Link */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="link" className="text-lg md:text-2xl font-medium">Link</label>
+            <input
+              required
+              type="text"
+              className="border-b-2 p-2 focus:outline-none focus:border-blue-500 bg-transparent"
+              id="link"
+              placeholder="Enter link"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+            />
           </div>
-          <div className=" lg:flex lg:flex-col lg:gap-y-3">
-          <label className="lg:text-2xl  lg:flex flex-col" htmlFor="link">Type</label>
-          <select className=" lg:bg-black lg:text-white" id="link"  value={type} onChange={(e)=>setType(e.target.value)}>
-            <option value="pdf">Pdf</option>
-            <option value="audio">Audio</option>
-            <option value="video">Video</option>
-            <option value="article">Article</option>
-            <option value="image">Image</option>
-            <option value="twitter">Twitter</option>
-            <option value="youtube">Youtube</option>
-            <option value="text">Text</option>
-            <option value="website">Website</option>
-          </select>
-          <div className=" lg:flex flex-col">
-          <label  className=" lg:text-2xl "   htmlFor="tag">Tags</label>
-          <div className=" lg:flex lg:gap-x-[40vh]">
-          <input type="text" placeholder="Enter tag" value={tag} onChange={(e)=>setTag(e.target.value)}></input>
-          <button  className=" lg:bg-white lg:text-black lg:border lg:rounded-full lg:px-3 lg:py-1 lg:hover:bg-black lg:hover:text-white lg:transition-all lg:duration-500 " type="button" onClick={HandleAddtag}>Add Tag</button>
+
+          {/* Type */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="type" className="text-lg md:text-2xl font-medium">Type</label>
+            <select
+              className="bg-black text-white p-2 rounded"
+              id="type"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="pdf">Pdf</option>
+              <option value="audio">Audio</option>
+              <option value="video">Video</option>
+              <option value="article">Article</option>
+              <option value="image">Image</option>
+              <option value="twitter">Twitter</option>
+              <option value="youtube">Youtube</option>
+              <option value="text">Text</option>
+              <option value="website">Website</option>
+            </select>
           </div>
-          </div>
-          </div>
-          <div className=" lg:flex lg:gap-x-1 lg:flex-wrap  lg:w-[40vw]">
-            {
-              tags.map((tag:string)=>(
-                <div key={tag} className=" lg:flex lg:justify-start lg:items-center lg:gap-x-1">
-                  <div className=" lg:text-xl">{tag}</div>
-                  <button className=" lg:bg-white lg:text-black lg:border lg:rounded-full lg:px-3 lg:py-1 lg:hover:bg-black lg:hover:text-white lg:transition-all lg:duration-500 "  type="button"  onClick={()=>HandleRemovetag(tag)}>X</button>
+
+          {/* Tags */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="tag" className="text-lg md:text-2xl font-medium">Tags</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                placeholder="Enter tag"
+                className="w-full border-b-2 p-2 focus:outline-none focus:border-blue-500 bg-transparent"
+                value={tag}
+                onChange={(e) => setTag(e.target.value)}
+              />
+              <button
+                className="bg-gray-100 text-black border rounded-full px-4 py-2 hover:bg-black hover:text-white transition-all duration-300 dark:bg-white dark:text-black dark:hover:bg-gray-800 dark:hover:text-white"
+                type="button"
+                onClick={HandleAddtag}
+              >
+                Add
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {tags.map((tag: string) => (
+                <div key={tag} className="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm">
+                  <span>#{tag}</span>
+                  <button
+                    className="ml-1 text-red-500 hover:text-red-700 font-bold"
+                    type="button"
+                    onClick={() => HandleRemovetag(tag)}
+                  >
+                    X
+                  </button>
                 </div>
-              ))
-            }
+              ))}
+            </div>
           </div>
-          <button className=" lg:bg-white lg:text-black  lg:rounded-full lg:px-3 lg:py-1 lg:hover:bg-black lg:hover:text-white lg:transition-all lg:duration-500 "  type="submit" >Submit</button>
+
+          {/* Submit Button */}
+          <button
+            className="w-full bg-blue-600 text-white rounded-full px-6 py-3 font-semibold hover:bg-blue-700 transition-colors duration-300 mt-4"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
       </div>
-    </div>
     </>
   )
 }

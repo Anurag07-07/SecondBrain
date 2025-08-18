@@ -1,6 +1,5 @@
-import Button from '../ui/Button'
 import { useNavigate } from 'react-router-dom'
-
+import { IoIosLogOut } from "react-icons/io";
 
 
 
@@ -15,10 +14,8 @@ const LogoutButton = () => {
 
 
   return (
-    <button onClick={LogoutDone} className=' lg:fixed lg:top-4 lg:right-20'>
-      <Button type='secondary'size='md' >
-        Logout
-      </Button>
+    <button onClick={LogoutDone} className='flex justify-center items-center lg:flex lg:justify-center lg:items-center lg:gap-x-1 lg:text-xl lg:font-extralight lg:text-gray-500 lg:hover:text-red-600'>
+     {<IoIosLogOut></IoIosLogOut>}Logout 
     </button>
   )
 }

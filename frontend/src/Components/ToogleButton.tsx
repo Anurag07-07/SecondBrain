@@ -22,7 +22,7 @@ const ToogleButton = () => {
   }
 
   return (
-    <div onClick={toogling} className={` lg:fixed lg:text-4xl lg:right-10 lg:top-4 lg:z-50  ${toogle ? `text-white`:`text-black`}`}>
+    <div onClick={toogling}>
       {
         toogle ? <MdOutlineWbSunny />:<FaMoon /> 
       }
