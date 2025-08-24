@@ -19,8 +19,6 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors());
-
 //Port
 app.use('/api/v1',User)
 app.use('/api/v1',Content)
