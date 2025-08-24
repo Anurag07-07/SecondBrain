@@ -13,10 +13,11 @@ import Content from './routes/Content.route.js'
 app.use(e.json())
 
 app.use(cors({
-    origin: "https://secondbrain-2.onrender.com", // Explicitly allow frontend
-    credentials: true, // Allow cookies/auth headers
+  origin: ["https://secondbrain-2.onrender.com"], // allow frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
-
 
 //Port
 app.use('/api/v1',User)

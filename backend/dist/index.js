@@ -9,9 +9,13 @@ import Content from './routes/Content.route.js';
 //Body parser
 app.use(e.json());
 app.use(cors({
-    origin: "http://localhost:5173", // Explicitly allow frontend
-    credentials: true, // Allow cookies/auth headers
+    origin: ["http://localhost:5173"], // allow frontend domain
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
 }));
+// Handle preflight requests explicitly
+// app.options("*", cors());
 //Port
 app.use('/api/v1', User);
 app.use('/api/v1', Content);

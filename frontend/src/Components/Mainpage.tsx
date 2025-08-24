@@ -11,6 +11,7 @@ type userIdProps = {
   username: string
 }
 
+
 export interface IData {
   _id: string
   title: string,
@@ -23,7 +24,8 @@ export interface IData {
 
 const Mainpage = () => {
   const [data, setData] = useState<IData[]>([])
-
+  const value = localStorage.getItem('username')
+  
   async function GetData() {
     try {
       const response = await axiosInstance.get("/api/v1/view_content", {
@@ -33,13 +35,12 @@ const Mainpage = () => {
       });
 
       if (response.data) {
-        console.log(response.data);
         setData([...response.data.data]);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }
+  }  
 
   useEffect(() => {
     GetData();
@@ -63,6 +64,9 @@ const Mainpage = () => {
     });
   });
 
+  console.log(name);
+  
+
   return (
     <>
       <Navbar />
@@ -70,7 +74,7 @@ const Mainpage = () => {
       <div className='flex flex-col lg:flex-row lg:justify-center min-h-[90.8vh] w-full bg-white dark:bg-gray-900 transition-colors duration-500'>
         {/* Greeting Section - Adjusted for Dark Mode */}
         <div className='flex flex-col justify-center p-6 lg:p-10 gap-y-3 lg:w-1/2 lg:gap-y-6 text-black dark:text-white'>
-          <div className='anim uppercase text-xl sm:text-2xl md:text-3xl lg:text-5xl font-light'>HELLO {(data[0]?.userId?.username)?.toUpperCase() || ""}!</div>
+          <div className='anim uppercase text-xl sm:text-2xl md:text-3xl lg:text-5xl font-light'>HELLO {value as unknown as string || ""}!</div>
           <div className='anim text-2xl sm:text-3xl md:text-4xl lg:text-6xl'>
             {(new Date().getHours() > 21 || new Date().getHours() < 4)
               ? "Good Night"

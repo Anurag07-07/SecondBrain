@@ -94,6 +94,7 @@ export const Signin = async (req, res) => {
             else {
                 res.status(200).json({
                     token: token,
+                    username
                 });
             }
         }

@@ -119,6 +119,7 @@ export const Signin = async (
       } else {
         res.status(200).json({
           token: token,
+          username
         });
       }
     } else {

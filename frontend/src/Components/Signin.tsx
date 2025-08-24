@@ -28,8 +28,8 @@ const Signin = () => {
       });
 
       if (response.data) {
-        console.log(response.data.token);
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('username',response.data.username)
         console.log(`Successfully login`);
         navigate('/home');
       } else {
